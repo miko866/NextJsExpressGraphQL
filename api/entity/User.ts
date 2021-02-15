@@ -2,11 +2,17 @@ import { prop as Property, getModelForClass } from '@typegoose/typegoose'
 import { ObjectId } from 'mongodb'
 import { Field, ObjectType } from 'type-graphql'
 
-@ObjectType()
+@ObjectType({ description: 'User' })
 export class User {
   @Field()
-  readonly _id: ObjectId;
+  readonly _id: ObjectId
 
   @Field()
-  @Property({})
+  @Property({ required: true })
+  email: string
+
+  @Property({ required: true })
+  password: string
 }
+
+export const UserModel = getModelForClass(User)
